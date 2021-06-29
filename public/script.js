@@ -4,9 +4,9 @@ const myVideo = document.createElement('video');
 myVideo.muted = true;
 
 var myPeer = new Peer(undefined, {
-  path: '/peerjs',
-  host: '/',
-  port: '4000'
+  secure: true, 
+  host: 'arcane-waters-48936.herokuapp.com', 
+  port: '443'
 })
 const peers = {}
 
