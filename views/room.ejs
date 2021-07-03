@@ -23,9 +23,13 @@
       }
       video{
          height: 300px;
+         border-radius: 1rem;
+         margin: 0.5rem;
          width: 400px;
          object-fit: cover;
-         padding: 8px;
+         transform: rotateY(180deg);
+         -webkit-transform: rotateY(180deg);
+         -moz-transform: rotateY(180deg);
       
       }
    </style>
@@ -40,26 +44,42 @@
          </div>
          <div class="main__controls">
             <div class="main__controls__block">
+               <div id="CopyLinkButton" class="main__controls__button">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Invite others</span>
+               </div>
+            </div>
+            <div class="main__controls__block">
                <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
                   <i class="fas fa-microphone"></i>
                   <span>Mute</span>
                </div>
-               
-            </div>
-            <div class="main__controls__block">
+
                <div class="main__controls__button">
-                  <span class="leave_meeting">Leave Meeting</span>
+                  <div class="leave_meeting">
+                     <i class="fas fa-sign-out-alt"></i>
+                  </div>
+                  <div class="leave_meeting">
+                  <span>End call</span>
+                  </div>
                </div>
-            </div>
-            <div class="main__controls__block">
-               
+
                <div onclick="playStop()" class="main__controls__button main__video_button" >
                   <i class="fas fa-video"></i>
-                  <span>Stop Video</span>
+                  <span>Camera off</span>
                </div>
             </div>
+
+            <div class="main__controls__block">
+               <div class="main__controls__button">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Participants</span>
+               </div>
+            </div>
+
          </div>
       </div>
+
       <div class="main__right">
          <div class="main__header">
             <h6>Chat</h6>

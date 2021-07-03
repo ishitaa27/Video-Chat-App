@@ -11,6 +11,8 @@ const myPeer = new Peer(undefined, {
 })
 const peers = {}
 
+const currentUser = prompt("Enter your name");
+
 let myVideoStream;
 navigator.mediaDevices.getUserMedia({
   video: true,
@@ -29,7 +31,6 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     //connectToNewUser(userId, stream)
-    console.log('user connected');
     setTimeout(connectToNewUser,1000,userId,stream)
   })
 
@@ -42,8 +43,8 @@ navigator.mediaDevices.getUserMedia({
       text.val('')
     }
   });
-  socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+  socket.on("createMessage", (message) => {
+    $("ul").append(`<li class="message"><b>user</b></br>${message}</li>`);
     scrollToBottom()
   })
 
@@ -60,11 +61,8 @@ myPeer.on('open', id => {
 
 function connectToNewUser(userId, stream){
   const call = myPeer.call(userId, stream)
-  console.log('connectToNewUser called');
   const video = document.createElement('video')
-  //console.log('before added stream');
   call.on('stream', (userVideoStream) => {
-    console.log('added stream');
     addVideoStream(video, userVideoStream)
   })
   call.on('close', () => {
@@ -82,8 +80,6 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
   
 }
-
-
 
 const scrollToBottom = () => {
   var d = $('.main__chat_window');
@@ -133,7 +129,7 @@ const setUnmuteButton = () => {
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
-    <span>Stop Video</span>
+    <span>Camera off</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
@@ -141,7 +137,16 @@ const setStopVideo = () => {
 const setPlayVideo = () => {
   const html = `
   <i class="stop fas fa-video-slash"></i>
-    <span>Play Video</span>
+    <span>Camera on</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
+
+
+const CopyLinkButton = document.querySelector("#CopyLinkButton");
+CopyLinkButton.addEventListener("click", (e) => {
+  prompt(
+    "Use this link to join this meeting",
+    window.location.href
+  );
+});
