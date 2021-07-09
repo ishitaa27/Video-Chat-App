@@ -1,19 +1,19 @@
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const { v4: uuidV4 } = require('uuid');
+const express = require('express')
+const app = express()
+const server = require('http').Server(app)
+const { v4: uuidV4 } = require('uuid')
 const io = require("socket.io")(server, {
   cors: {
     origin: '*'
   }
-});
-const { ExpressPeerServer } = require('peer');
+})
+const { ExpressPeerServer } = require('peer')
 const peerServer = ExpressPeerServer(server, {
   debug: true
-});
+})
 
-app.use('/peerjs', peerServer);
-app.use(express.static('public'));
+app.use('/peerjs', peerServer)
+app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
 
@@ -28,16 +28,14 @@ app.get('/:room', (req, res) => {
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
-    socket.to(roomId).emit('user-connected', userId);
-    // messages
+    socket.to(roomId).emit('user-connected', userId)
     socket.on('message', (message, username) => {
-      //send message to the same room
       io.to(roomId).emit('createMessage', message, username)
-  }); 
+  }) 
   socket.on('disconnect', () => {
     socket.to(roomId).emit('user-disconnected', userId)
   })
   })
 })
 
-server.listen(process.env.PORT||4000)
+server.listen(process.env.PORT||4500)
