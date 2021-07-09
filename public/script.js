@@ -1,7 +1,7 @@
 const socket = io('/')
 
 //Create a new Peer
-const myPeer = new Peer(undefined, {
+const newPeer = new Peer(undefined, {
   secure: true, 
   host: 'arcane-waters-48936.herokuapp.com', 
   path: '/peerjs',
