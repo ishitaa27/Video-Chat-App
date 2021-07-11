@@ -12,7 +12,7 @@ const newPeer = new Peer(undefined, {
 const allpeers = {}
 
 //Will store username
-const currentUser = prompt("Enter your name")
+var currentUser = prompt("Enter your name")
 
 const videoGrid = document.getElementById('video-grid')
 const myVideo = document.createElement('video')
@@ -34,10 +34,10 @@ navigator.mediaDevices.getUserMedia({
     const video = document.createElement('video')
     call.on('stream', (userVideoStream) => {
       addVideoStream(video, userVideoStream)
+      
     })
   })
 
-  //Will call the function connectToNewUser to add a new User to the call
   socket.on('user-connected', userId => {
     setTimeout(connectToNewUser,1000,userId,stream)
   })
@@ -55,8 +55,8 @@ navigator.mediaDevices.getUserMedia({
   
   //Display message on chat window
   socket.on("createMessage", (message, username) => {
-    username === currentUser ? "me" : username
-    $("ul").append(`<li class="message"><b>${username}</b></br>${message}</li>`)
+    
+    $("ul").append(`<li class="message"><b>${username === currentUser ? "me" : username}</b></br>${message}</li>`)
     scrollToBottom()
   })
 
@@ -172,3 +172,12 @@ InviteButton.addEventListener("click", (e) => {
     window.location.href
   )
 })
+
+const InfoButton = document.querySelector("#Info")
+InfoButton.addEventListener("click", (e) =>{
+  currentUser = prompt("Enter your name: ")
+})
+
+
+
+

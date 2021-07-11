@@ -29,13 +29,14 @@ io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
     socket.to(roomId).emit('user-connected', userId)
-    socket.on('message', (message, username) => {
+     
+  socket.on('message', (message, username) => {
       io.to(roomId).emit('createMessage', message, username)
-  }) 
+  })
   socket.on('disconnect', () => {
     socket.to(roomId).emit('user-disconnected', userId)
   })
-  })
+})
 })
 
 server.listen(process.env.PORT||4500)
