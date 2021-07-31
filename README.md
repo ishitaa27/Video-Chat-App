@@ -12,7 +12,6 @@ Try the app at: - [arcane-waters-48936.herokuapp.com](https://arcane-waters-4893
 3. Input/Modify username
 4. Chat with others
 5. Invite others
-6. Record (TODO)
 
 ## Technologies Used
 
